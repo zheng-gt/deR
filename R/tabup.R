@@ -33,14 +33,12 @@ tabup <- function(x,
   num_vars <- length(vars)
 
 
-  # Remove missing values if na.rm is TRUE
   if (na.rm) {
     vars_char <- sapply(vars, rlang::as_string)
     x <- dplyr::filter(x, !if_any(all_of(vars_char), is.na))
   }
 
 
-  # Compute the counts and get the 1st dataframe
   x <- dplyr::count(x, !!!vars, wt = {{ wt }})
   x <- dplyr::rename(x, Freq = n)
   x <- dplyr::mutate(x,
@@ -48,18 +46,15 @@ tabup <- function(x,
                      Cum = cumsum(Percent))
 
 
-  # If there is only one variable:
   total_row <- NULL
   if (num_vars == 1) {
-    # Prepare variable name and total row
     var_name <- rlang::as_name(vars[[1]])
     total_freq <- sum(x$Freq)
 
-    # Coerce to character in 1st df
+
     x <- x %>%
       dplyr::mutate(!!var_name := as.character(.data[[var_name]]))
 
-    # tible for 2st df
     total_row <- tibble::tibble(
       !!var_name := "Total",
       Freq = total_freq,
@@ -69,19 +64,16 @@ tabup <- function(x,
   }
 
 
-  # Sort the data if required
   if (sort) {
     x <- dplyr::arrange(x, !!!vars)
   }
 
 
-  # Add the total row at the end
   if (!is.null(total_row)) {
     x <- dplyr::bind_rows(x, total_row)
   }
 
 
-  # Display the result
   print(x)
 
   invisible(x)

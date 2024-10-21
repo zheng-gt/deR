@@ -1,6 +1,27 @@
-.Rproj.user
+
+# R 缓存文件
 .Rhistory
 .Rdata
+
+# RStudio 设置和项目文件
+.Rproj.user/
+*.Rproj
+
+# 构建的包文件
+*.tar.gz
+
+# 临时数据和输出
+/output/
+
+# log文件：忽略特定文件类型：使用通配符 * 忽略某种类型的所有文件，例如忽略所有 .log 文件
+*.log
+
+# 忽略特定文件
+tabup_master.R
+
+
 .httr-oauth
 .DS_Store
 .quarto
+
+
