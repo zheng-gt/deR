@@ -19,7 +19,7 @@
 #' df %>% count(v1)
 #' df %>% tabup(v1)
 #' df %>% tabup(v1, wt = v2)
-#' df %>% filter(v2 >= 2) %>% tabup(v1)
+#' df %>% filter(v2 >= 4) %>% tabup(v1)
 #' # Two-way tabulation
 #' df %>% tabup(v1, v2)
 #' @export
@@ -77,4 +77,6 @@ tabup <- function(x,
 
   invisible(x)
 }
+
+
 
