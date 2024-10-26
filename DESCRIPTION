@@ -1,12 +1,16 @@
 Package: deR
-Title: What the Package Does (One Line, Title Case)
-Version: 0.1.5
+Title: Quickly Generate Summary Tables
+Version: 0.1.7
 Authors@R: 
     person("", "Zheng", , "first.last@example.com", role = c("aut", "cre"),
            comment = c(ORCID = "YOUR-ORCID-ID"))
-Description: What the package does (one paragraph).
-License: `use_mit_license()`, `use_gpl3_license()` or friends to pick a
-    license
+Description: deR is an R package designed to simplify data description tasks, with functions aimed at helping you quickly generate summary tables and descriptive statistics.
+License: Artistic-2.0
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.2
+Imports:
+    dplyr,
+    rlang,
+    tibble
+LazyData: true

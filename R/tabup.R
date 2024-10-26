@@ -1,3 +1,5 @@
+
+utils::globalVariables(c("n", "Freq", "Percent", ".data"))
 #' Cross Tabulation Function
 #'
 #' Generates a frequency table for the specified variables, including counts, percentages, and cumulative percentages. Supports weighted counts and optional removal of missing values.
@@ -22,6 +24,9 @@
 #' df %>% filter(v2 >= 4) %>% tabup(v1)
 #' # Two-way tabulation
 #' df %>% tabup(v1, v2)
+#' @importFrom dplyr count rename mutate bind_rows arrange if_any all_of %>%
+#' @importFrom rlang ensyms as_name as_string :=
+#' @importFrom tibble tibble
 #' @export
 tabup <- function(x,
                    ...,
@@ -32,10 +37,12 @@ tabup <- function(x,
   num_vars <- length(vars)
 
 
+
   if (na.rm) {
     vars_char <- sapply(vars, rlang::as_string)
-    x <- dplyr::filter(x, !if_any(all_of(vars_char), is.na))
+    x <- dplyr::filter(x, !dplyr::if_any(dplyr::all_of(vars_char), is.na))
   }
+
 
 
   x <- dplyr::count(x, !!!vars, wt = {{ wt }})
@@ -45,15 +52,18 @@ tabup <- function(x,
                      Cum = cumsum(Percent))
 
 
+
   total_row <- NULL
   if (num_vars == 1) {
+    # Prepare variable name and total row
     var_name <- rlang::as_name(vars[[1]])
     total_freq <- sum(x$Freq)
 
-
+    # Coerce to character in 1st df
     x <- x %>%
       dplyr::mutate(!!var_name := as.character(.data[[var_name]]))
 
+    # tible for 2st df
     total_row <- tibble::tibble(
       !!var_name := "Total",
       Freq = total_freq,
@@ -63,9 +73,11 @@ tabup <- function(x,
   }
 
 
+
   if (sort) {
     x <- dplyr::arrange(x, !!!vars)
   }
+
 
 
   if (!is.null(total_row)) {
@@ -73,10 +85,9 @@ tabup <- function(x,
   }
 
 
+
   print(x)
 
   invisible(x)
 }
-
-
 
