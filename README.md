@@ -23,7 +23,7 @@ remotes::install_github("zheng-gt/deR")
 
 # tabup Function
 
-The tabup function generates a frequency table for specified variables with options to include weighted counts, remove missing values, and control the sorting order. This function is flexible for both one-way and two-way tabulations. For one-way tables, a Total row is included, showing the overall count and percentage..
+The tabup function generates a frequency table for specified variables with options to include weighted counts, remove missing values, and control the sorting order. This function is flexible for both one-way and two-way tabulations. **For one-way tables, a Total row is included, showing the overall count and percentage.**
 
 ``` r
 tabup(x, ..., wt = NULL, na.rm = FALSE, sort = TRUE)
