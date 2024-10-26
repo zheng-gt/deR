@@ -11,18 +11,17 @@
 #' @examples
 #' # Setup
 #' library(dplyr)
-#' N <- 100
-#' K <- 10
 #' df <- tibble(
-#'   id = sample(c(NA, 1:5), N / K, TRUE),
-#'   v1 = sample(1:5, N / K, TRUE)
+#'   v1 = sample(c(NA, 1:5), 20, TRUE),
+#'   v2 = sample(1:5, 20, TRUE)
 #' )
 #' # One-way tabulation
-#' df %>% tabup(id)
-#' df %>% tabup(id, wt = v1)
+#' df %>% count(v1)
+#' df %>% tabup(v1)
+#' df %>% tabup(v1, wt = v2)
 #' # Two-way tabulation
-#' df %>% tabup(id, v1)
-#' df %>% filter(id >= 3) %>% tabup(id)
+#' df %>% tabup(v1, v2)
+#' df %>% filter(v2 >= 3) %>% tabup(v1)
 #' @export
 tabup <- function(x,
                    ...,
