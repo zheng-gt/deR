@@ -1,9 +1,10 @@
 Package: deR
 Title: Quickly Generate Summary Tables
-Version: 0.1.7
+Version: 0.1.8
 Authors@R: 
-    person("", "Zheng", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+    person("Gt", "Zheng", , "zhenggt@126.com", role = c("aut", "cre"),
+           comment = c(ORCID = ""))
+Maintainer: Gt Zheng <zhenggt@126.com>
 Description: deR is an R package designed to simplify data description tasks, with functions aimed at helping you quickly generate summary tables and descriptive statistics.
 License: Artistic-2.0
 Encoding: UTF-8
