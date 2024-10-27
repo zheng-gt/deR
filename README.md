@@ -21,12 +21,12 @@ install.packages("remotes")
 remotes::install_github("zheng-gt/deR")
 ```
 
-# tabup Function
+# tab_up Function
 
-The tabup function generates a frequency table for specified variables with options to include weighted counts, remove missing values, and control the sorting order. This function is flexible for both one-way and two-way tabulations. **For one-way tables, a Total row is included, showing the overall count and percentage.**
+The tab_up function generates a frequency table for specified variables with options to include weighted counts, remove missing values, and control the sorting order. This function is flexible for both one-way and two-way tabulations. **For one-way tables, a Total row is included, showing the overall count and percentage.**
 
 ``` r
-tabup(x, ..., wt = NULL, na.rm = FALSE, sort = TRUE)
+tab_up(x, ..., wt = NULL, na.rm = FALSE, sort = TRUE)
 ```
 
 # Example Usage:
@@ -43,14 +43,14 @@ df <- tibble(
 )
 
 # One-way tabulation
-df %>% tabup(v1)
+df %>% tab_up(v1)
 
 # Weighted one-way tabulation
-df %>% tabup(v1, wt = v2)
+df %>% tab_up(v1, wt = v2)
 
 # One-way tabulation with filtering and missing values removed
-df %>% filter(v2 >= 3) %>% tabup(v1, na.rm = TRUE)
+df %>% filter(v2 >= 3) %>% tab_up(v1, na.rm = TRUE)
 
 # Two-way tabulation
-df %>% tabup(v1, v2)
+df %>% tab_up(v1, v2)
 ```

@@ -1,23 +1,23 @@
 
-# R 缓存文件
+# R cache files
 .Rhistory
 .Rdata
 
-# RStudio 设置和项目文件
+# RStudio settings and project files
 .Rproj.user/
 *.Rproj
 
-# 构建的包文件
+# Built package files
 *.tar.gz
 
-# 临时数据和输出
+# Temporary data and output
 /output/
 
-# log文件：忽略特定文件类型：使用通配符 * 忽略某种类型的所有文件，例如忽略所有 .log 文件
+# Log files
 *.log
 
-# 忽略特定文件
-tabup_master.R
+# .R files
+Master_tab_up.R
 
 
 .httr-oauth

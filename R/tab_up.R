@@ -19,16 +19,16 @@ utils::globalVariables(c("n", "Freq", "Percent", ".data"))
 #' )
 #' # One-way tabulation
 #' df %>% count(v1)
-#' df %>% tabup(v1)
-#' df %>% tabup(v1, wt = v2)
-#' df %>% filter(v2 >= 4) %>% tabup(v1)
+#' df %>% tab_up(v1)
+#' df %>% tab_up(v1, wt = v2)
+#' df %>% filter(v2 >= 4) %>% tab_up(v1)
 #' # Two-way tabulation
-#' df %>% tabup(v1, v2)
+#' df %>% tab_up(v1, v2)
 #' @importFrom dplyr count rename mutate bind_rows arrange if_any all_of %>%
 #' @importFrom rlang ensyms as_name as_string :=
 #' @importFrom tibble tibble
 #' @export
-tabup <- function(x,
+tab_up <- function(x,
                    ...,
                    wt = NULL,
                    na.rm = FALSE,
@@ -36,14 +36,10 @@ tabup <- function(x,
   vars <- rlang::ensyms(...)
   num_vars <- length(vars)
 
-
-
   if (na.rm) {
     vars_char <- sapply(vars, rlang::as_string)
     x <- dplyr::filter(x, !dplyr::if_any(dplyr::all_of(vars_char), is.na))
   }
-
-
 
   x <- dplyr::count(x, !!!vars, wt = {{ wt }})
   x <- dplyr::rename(x, Freq = n)
@@ -51,19 +47,14 @@ tabup <- function(x,
                      Percent = Freq / sum(Freq) * 100,
                      Cum = cumsum(Percent))
 
-
-
   total_row <- NULL
   if (num_vars == 1) {
-    # Prepare variable name and total row
     var_name <- rlang::as_name(vars[[1]])
     total_freq <- sum(x$Freq)
 
-    # Coerce to character in 1st df
     x <- x %>%
       dplyr::mutate(!!var_name := as.character(.data[[var_name]]))
 
-    # tible for 2st df
     total_row <- tibble::tibble(
       !!var_name := "Total",
       Freq = total_freq,
@@ -72,19 +63,13 @@ tabup <- function(x,
     )
   }
 
-
-
   if (sort) {
     x <- dplyr::arrange(x, !!!vars)
   }
 
-
-
   if (!is.null(total_row)) {
     x <- dplyr::bind_rows(x, total_row)
   }
-
-
 
   print(x)
 

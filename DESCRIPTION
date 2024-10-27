@@ -1,6 +1,6 @@
 Package: deR
 Title: Quickly Generate Summary Tables
-Version: 0.1.8
+Version: 0.1.9
 Authors@R: 
     person("Gt", "Zheng", , "zhenggt@126.com", role = c("aut", "cre"),
            comment = c(ORCID = ""))
